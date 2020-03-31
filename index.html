@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ATAT Invoice - 117-XI - Santhosh Sekar - 2514045893.xls</title>
+    <meta name="viewport"
+        content="target-densitydpi=device-dpi,user-scalable=1,minimum-scale=1,maximum-scale=2.5,initial-scale=1,width=device-width">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1 style="clear:both;">All Time Auto Transport</h1>
+
+    <div style="width: 33%; float:left">
+        <form>
+            <h2>Delivery Order</h2>
+            <fieldset>
+                <legend>PERSONAL INFORMAITON</legend>
+                <label>Full Name</label><br>
+                <input type="text" id="cstNameInput" onchange=userImput()><br><br>
+                <label>Phone</label><br>
+                <input><br><br>
+                <label>Email</label><br>
+                <input><br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>VEHICLE INFORMAITON</legend>
+                <label for="vehicleCuantity">Number of Vehicles to transport</label><br><br>
+                <input type="number" min=1 id="vehicleCuantity" name="vehicleCuantity">
+                <div id="vehicleList">
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div style="width:1000px; border:solid; float:left;margin-top:2%">
+        <iframe id="invoiceIframe" src="Invoice.html" style="width: 1000px; height:950px;"></iframe>
+        <script>
+            var iframe = document.getElementById('invoiceIframe');
+            var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+            console.log(innerDoc.getElementById("cstName"));
+        </script>
+
+    </div>
+
+</body>
+
+</html>
