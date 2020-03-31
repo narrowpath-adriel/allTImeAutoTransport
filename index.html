@@ -39,7 +39,7 @@
         <iframe id="invoiceIframe" src="Invoice.html" style="width: 1000px; height:950px;"></iframe>
         <script>
             var iframe = document.getElementById('invoiceIframe');
-            var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+            var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
             console.log(innerDoc.getElementById("cstName"));
         </script>
 
