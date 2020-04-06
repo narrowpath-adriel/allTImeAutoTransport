@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ATAT Invoice Generator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+        html {
+            overflow: visible;
+        }
+
+        #sheets-viewport {
+            overflow: auto;
+        }
+
+        #sheets-viewport.widget-viewport {
+            overflow: hidden;
+        }
+
+        .grid-container {
+            overflow: visible;
+            background: white;
+        }
+
+        .grid-table-container {
+            overflow: visible;
+        }
+
+        #top-bar {
+            background: url("//ssl.gstatic.com/docs/spreadsheets/publishheader.png") repeat-x bottom;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #top-bar {
+            border-bottom: 1px solid #ccc;
+            padding: 6px 6px 0;
+        }
+
+        #doc-title {
+            padding-bottom: 5px;
+        }
+
+        #doc-title .name {
+            font-size: 15px;
+        }
+
+        #sheet-menu {
+            font-size: 13px;
+            margin: 6px 0 0;
+            padding: 0 0 5px;
+        }
+
+        #sheet-menu li {
+            display: inline;
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 8px;
+        }
+
+        #sheet-menu li.active {
+            background-color: #fff;
+            font-weight: bold;
+            border: 1px solid #999;
+        }
+
+        #top-bar #sheet-menu li.active {
+            border-bottom: 0;
+        }
+
+        #sheet-menu a,
+        #sheet-menu a:visited {
+            color: #07c;
+        }
+
+        #footer {
+            background: #f0f0f0;
+            border-top: 1px #ccc solid;
+            border-bottom: 1px #ccc solid;
+            font-size: 13;
+            padding: 10px 10px;
+        }
+
+        .dash {
+            padding: 0 6px;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .s43 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID #000000;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Arial';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s50 {
+            border-bottom: 1px SOLID #aaaaaa;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Arial';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s31 {
+            border-bottom: 1px SOLID #1849b5;
+            border-right: 1px DOTTED #000000;
+            background-color: #ffffff;
+            text-align: center;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s40 {
+            border-bottom: 1px SOLID #000000;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Arial';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s42 {
+            border-bottom: 1px SOLID #000000;
+            border-right: 1px SOLID #000000;
+            background-color: #bcc5e1;
+            text-align: center;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s47 {
+            border-bottom: 1px SOLID #000000;
+            border-right: 1px SOLID #000000;
+            background-color: #ffffff;
+            text-align: center;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s13 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s17 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #1849b5;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s45 {
+            border-bottom: 1px SOLID #000000;
+            border-right: 1px SOLID #000000;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+            width:229px;
+        }
+
+        .s28 {
+            border-bottom: 1px DOTTED #000000;
+            border-right: 1px DOTTED #000000;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: top;
+            white-space: normal;
+            overflow: hidden;
+            word-wrap: break-word;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s18 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s19 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: normal;
+            overflow: hidden;
+            word-wrap: break-word;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s5 {
+            border-right: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s37 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: center;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: normal;
+            overflow: hidden;
+            word-wrap: break-word;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s35 {
+            border-right: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #e4e8f3;
+            text-align: left;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 14pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s44 {
+            border-bottom: 1px SOLID #000000;
+            border-right: 1px SOLID #000000;
+            background-color: #bcc5e1;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s48 {
+            border-bottom: 1px SOLID #aaaaaa;
+            border-right: 1px SOLID #000000;
+            background-color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s41 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID #000000;
+            background-color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s23 {
+            border-left: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #1849b5;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s0 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 24pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s30 {
+            border-bottom: 1px SOLID #1849b5;
+            border-right: 1px DOTTED #000000;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s36 {
+            border-left: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Arial';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s6 {
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: top;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s29 {
+            border-bottom: 1px SOLID #1849b5;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s39 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #c1f1ed;
+            text-align: center;
+            font-weight: bold;
+            color: #182c63;
+            font-family: 'Times New Roman';
+            font-size: 12pt;
+            vertical-align: middle;
+            white-space: normal;
+            overflow: hidden;
+            word-wrap: break-word;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s27 {
+            border-bottom: 1px DOTTED #000000;
+            border-right: 1px DOTTED #000000;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: normal;
+            overflow: hidden;
+            word-wrap: break-word;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s1 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            color: #182c63;
+            font-family: 'Times New Roman';
+            font-size: 24pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s33 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            font-style: italic;
+            color: #1849b5;
+            font-family: 'Times New Roman';
+            font-size: 12pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s49 {
+            border-bottom: 1px SOLID #aaaaaa;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Arial';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s3 {
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Arial';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s34 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #c1f1ed;
+            text-align: left;
+            font-weight: bold;
+            color: #182c63;
+            font-family: 'Times New Roman';
+            font-size: 14pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s15 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s21 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            text-decoration: underline;
+            -webkit-text-decoration-skip: none;
+            text-decoration-skip-ink: none;
+            color: #0000ff;
+            font-family: 'Arial';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s2 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: right;
+            font-weight: bold;
+            color: #1849b5;
+            font-family: 'Times New Roman';
+            font-size: 36pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 12px 0px 0px;
+        }
+
+        .s8 {
+            border-left: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s11 {
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s4 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s24 {
+            border-bottom: 1px DOTTED #000000;
+            border-right: 1px DOTTED #000000;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s7 {
+            border-left: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: top;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s32 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s26 {
+            border-bottom: 1px DOTTED #000000;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s25 {
+            border-bottom: 1px DOTTED #000000;
+            border-right: 1px DOTTED #000000;
+            background-color: #ffffff;
+            text-align: center;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s20 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            text-decoration: underline;
+            -webkit-text-decoration-skip: none;
+            text-decoration-skip-ink: none;
+            color: #ffffff;
+            font-family: 'Arial';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s9 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s14 {
+            border-right: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s46 {
+            border-bottom: 1px SOLID #000000;
+            border-right: 1px SOLID #000000;
+            background-color: #bcc5e1;
+            text-align: left;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s38 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #c1f1ed;
+            text-align: left;
+            font-weight: bold;
+            color: #182c63;
+            font-family: 'Times New Roman';
+            font-size: 12pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s16 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s22 {
+            border-right: none;
+            border-bottom: 1px SOLID transparent;
+            background-color: #1849b5;
+            text-align: left;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s10 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #ffffff;
+            text-align: left;
+            color: #000000;
+            font-family: 'Arial';
+            font-size: 11pt;
+            vertical-align: bottom;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+
+        .s12 {
+            border-bottom: 1px SOLID transparent;
+            border-right: 1px SOLID transparent;
+            background-color: #1849b5;
+            text-align: center;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Times New Roman';
+            font-size: 11pt;
+            vertical-align: middle;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 0px 3px 0px 3px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+        integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"
+        integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"
+        integrity="sha256-1UYP03Qm8NpJtVQjd6OTwT9DjfgsYrNa8w1szRxBeqQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1 style="clear:both;">All Time Auto Transport</h1>
+
+    <div style="width: 100%; float:left">
+        <form>
+            <h2>Delivery Order</h2>
+            <div style="width: 20%; float:left;border:solid">
+                <fieldset style="width: 30%; float:left">
+                    <legend>PERSONAL INFORMAITON</legend>
+                    <label>Full Name</label><br>
+                    <input type="text" id="cstNameInput"><br><br>
+                    <label>Phone</label><br>
+                    <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" id="cstPhoneInput"><br><br>
+                    <label>Email</label><br>
+                    <input type="email" id="cstEmailInput"><br><br>
+                    <label>Invoice Number</label><br>
+                    <input type="text" id="cstInvNumInput"><br><br>
+                </fieldset>
+                <br>
+                <fieldset style="width: 89%; float:left; clear:left;" id="cardInfoSet">
+                    <Legend>CARD INFORMATION</Legend>
+                    <label>Credit Card #</label><br>
+                    <input type="text" id="ccNum"><br><br>
+                    <label>Card Holder Name</label><br>
+                    <input type="text" id="ccName"><br><br>
+                    <label>Expiration</label><br>
+                    <input type="text" id="ccExpiration"><br><br>
+                    <label>CVV</label><br>
+                    <input type="text" id="cvv"><br><br>
+                    <label>Billing Zip</label><br>
+                    <input type="text" id="billingZip"><br><br>
+                </fieldset>
+
+            </div>
+
+            <fieldset style="width: 60%; float:left">
+                <legend>VEHICLE INFORMAITON</legend>
+                <label for="vehicleCuantity">Number of Vehicles to transport:</label><br>
+                <input type="number" min=1 id="vehicleCuantity" name="vehicleCuantity"><br><br>
+                <label>Reservation Fee</label><br>
+                <input type="text" id="reservFeeInput"><br><br>
+                <div id="vehicleList"></div>
+            </fieldset>
+            <br>
+        </form>
+    </div>
+    <br>
+    <div id="invoicePdf" style="float:left; padding-right:10%">
+
+        <body>
+
+            <table class="waffle no-grid" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th class="row-header freezebar-origin-ltr header-shim row-header-shim"></th>
+                        <th id="1757256185C0" style="width:52px" class="header-shim"></th>
+                        <th id="1757256185C1" style="width:52px" class="header-shim"></th>
+                        <th id="1757256185C2" style="width:100px" class="header-shim"></th>
+                        <th id="1757256185C3" style="width:146px" class="header-shim"></th>
+                        <th id="1757256185C4" style="width:52px" class="header-shim"></th>
+                        <th id="1757256185C5" style="width:52px" class="header-shim"></th>
+                        <th id="1757256185C6" style="width:52px" class="header-shim"></th>
+                        <th id="1757256185C7" style="width:100px" class="header-shim"></th>
+                        <th id="1757256185C8" style="width:140px" class="header-shim"></th>
+                        <th id="1757256185C9" style="width:92px" class="header-shim"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height:77px;">
+                        <td class="s0"></td>
+                        <td class="s1" colspan="6">All-Time Auto Transport, LLC</td>
+                        <td class="s2" colspan="2">INVOICE</td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:25px;">
+                        <td class="s4"></td>
+                        <td class="s5 softmerge">
+                            <div class="softmerge-inner" style="width: 296px; left: -1px;">1700 Banks Road Suite 50-N
+                            </div>
+                        </td>
+                        <td class="s6"></td>
+                        <td class="s7"></td>
+                        <td class="s8"></td>
+                        <td class="s9"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:25px;">
+                        <td class="s4"></td>
+                        <td class="s5 softmerge">
+                            <div class="softmerge-inner" style="width: 296px; left: -1px;">Margate, FL 33063</div>
+                        </td>
+                        <td class="s11"></td>
+                        <td class="s8"></td>
+                        <td class="s8"></td>
+                        <td class="s9"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:25px;">
+                        <td class="s4"></td>
+                        <td class="s5 softmerge">
+                            <div class="softmerge-inner" style="width: 296px; left: -1px;">Phone: (800) 429-3060</div>
+                        </td>
+                        <td class="s11"></td>
+                        <td class="s8"></td>
+                        <td class="s8"></td>
+                        <td class="s9"></td>
+                        <td class="s12" colspan="2">INVOICE #</td>
+                        <td class="s12">DATE</td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:25px;">
+                        <td class="s13"></td>
+                        <td class="s14 softmerge">
+                            <div class="softmerge-inner" style="width: 150px; left: -1px;">MC #: 01042071</div>
+                        </td>
+                        <td class="s8"></td>
+                        <td class="s8"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s15 cstInvNum" colspan="2">[IN#]</td>
+                        <td class="s15 todayDate"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:19px;">
+                        <td class="s16"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:25px;">
+                        <td class="s4"></td>
+                        <td class="s17" colspan="3">BILL TO</td>
+                        <td class="s9"></td>
+                        <td class="s18"></td>
+                        <td class="s12" colspan="2">CUSTOMER ID</td>
+                        <td class="s12">TERMS</td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s16"></td>
+                        <td class="s9 cstName">[Name]</td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s18"></td>
+                        <td class="s15 cstId" colspan="2">[Customer ID]</td>
+                        <td class="s19" rowspan="4">Reservation Fee<br>(Due Upon Order)<br>Balance Due<br>(Due Upon
+                            Delivery)
+                        </td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s16"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s18"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s16"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s18"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s16"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s18"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s16"></td>
+                        <td class="s9 cstPhone">[Phone]</td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s18"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s20"></td>
+                        <td class="s21 cstEmail">[Email]</td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:19px;">
+                        <td class="s16"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s9"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:25px;">
+                        <td class="s4"></td>
+                        <td class="s22 softmerge">
+                            <div class="softmerge-inner" style="width: 150px; left: -1px;">DESCRIPTION</div>
+                        </td>
+                        <td class="s23"></td>
+                        <td class="s23"></td>
+                        <td class="s17"></td>
+                        <td class="s17"></td>
+                        <td class="s12">QTY</td>
+                        <td class="s12">UNIT PRICE</td>
+                        <td class="s12">AMOUNT</td>
+                        <td class="s3"></td>
+                    </tr>
+                </tbody>
+                <tbody id="vehicleListDisplay"></tbody>
+                <tbody>
+                    <tr style="height:20px"></tr>
+                    <tr style="height:26px;">
+                        <td class="s32"></td>
+                        <td class="s33" colspan="5">Thank you for your business!</td>
+                        <td class="s34" colspan="2">ORDER TOTAL</td>
+                        <td class="s35 softmerge">
+                            <div class="softmerge-inner" id="amtTotal" style="width: 230px; left: -1px;">$ [Amt total]
+                            </div>
+                        </td>
+                        <td class="s36"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s4"></td>
+                        <td class="s37" colspan="5" rowspan="2">If you have any questions about this order, please
+                            contact:<br>Jonathan Cayer, 800-429-3060, jcayer@alltimeautotransport.com</td>
+                        <td class="s38" colspan="2">RESERVATION FEE</td>
+                        <td class="s35 softmerge">
+                            <div class="softmerge-inner" id="resFee" style="width: 230px; left: -1px;">$ [Res Fee]</div>
+                        </td>
+                        <td class="s36"></td>
+                    </tr>
+                    <tr style="height:45px;">
+                        <td class="s4"></td>
+                        <td class="s39" colspan="2">BALANCE DUE<br>(Upon Delivery)</td>
+                        <td class="s35 softmerge">
+                            <div class="softmerge-inner" id="totalDue" style="width: 230px; left: -1px;">$ [total]</div>
+                        </td>
+                        <td class="s36"></td>
+                    </tr>
+                    <tr style="height:17px;">
+                        <td class="s4"></td>
+                        <td class="s40"></td>
+                        <td class="s40"></td>
+                        <td class="s40"></td>
+                        <td class="s40"></td>
+                        <td class="s10"></td>
+                        <td class="s40"></td>
+                        <td class="s40"></td>
+                        <td class="s40"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s41"></td>
+                        <td class="s42" colspan="4">Credit Card Information:</td>
+                        <td class="s43"></td>
+                        <td class="s42" colspan="3">Authorization Information:</td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s41"></td>
+                        <td class="s44" colspan="1">Credit Card #:</td>
+                        <td class="s45" id="cardId" colspan="3" style="width:229px;"></td>
+                        <td class="s43"></td>
+                        <td class="s46">Sign:</td>
+                        <td class="s47" colspan="2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s41"></td>
+                        <td class="s44" colspan="1">Card Holder Name:</td>
+                        <td class="s45" id="cardName" colspan="3" style="width:229px;"></td>
+                        <td class="s43"></td>
+                        <td class="s46">Print:</td>
+                        <td class="s45" colspan="2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s41"></td>
+                        <td class="s44" colspan="1">Expiration:</td>
+                        <td class="s45" id="expDate" colspan="3" style="width:229px;"></td>
+                        <td class="s43"></td>
+                        <td class="s46">Date:</td>
+                        <td class="s47" colspan="2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s41"></td>
+                        <td class="s44" colspan="1">CVV:</td>
+                        <td class="s45" id="cvvId" colspan="3" style="width:229px;"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s41"></td>
+                        <td class="s44" colspan="1">Billing Zip:</td>
+                        <td class="s45" id="cardZip" colspan="3" style="width:229px;"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s48"></td>
+                        <td class="s44" colspan="1"></td>
+                        <td class="s45" colspan="3"></td>
+                        <td class="s49"></td>
+                        <td class="s49"></td>
+                        <td class="s49"></td>
+                        <td class="s49"></td>
+                        <td class="s50"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+
+    </div>
+    <Script>
+
+        var todayDateFinder = new Date();
+        $(".todayDate").text(todayDateFinder.getMonth() + "/" + todayDateFinder.getDate() + "/" + todayDateFinder.getFullYear());
+
+        $("#cstNameInput").change(function () {
+            $(".cstName").text($("#cstNameInput").val());
+        })
+
+        $("#cstPhoneInput").change(function () {
+
+            if (isNaN($("#cstPhoneInput").val()) || $("#cstPhoneInput").val().length < 10 || $("#cstPhoneInput").val().length > 10) {
+
+                $("#cstPhoneInput").css({ "border-color": "#FF0000" })
+
+            } else {
+
+                $("#cstPhoneInput").css({ "border-color": "#FFFFFF" });
+
+                var parsedPhone = [];
+
+                for (var i = 0, len = $("#cstPhoneInput").val().toString().length; i < len; i += 1) {
+
+                    parsedPhone.push(+$("#cstPhoneInput").val().toString().charAt(i));
+
+                }
+
+                $(".cstPhone").text(parsedPhone[0] + parsedPhone[1].toString() + parsedPhone[2] + "-" + parsedPhone[3] + parsedPhone[4] + parsedPhone[5] + "-" + parsedPhone[6] + parsedPhone[7] + parsedPhone[8] + parsedPhone[9])
+
+                $(".cstId").text($("#cstPhoneInput").val())
+
+            }
+
+        })
+
+        $("#cstEmailInput").change(function () {
+
+            if (!$("#cstEmailInput").val().includes("@") || !$("#cstEmailInput").val().includes(".")) {
+
+                $("#cstEmailInput").css({ "border-color": "#FF0000" })
+
+            } else {
+
+                $("#cstEmailInput").css({ "border-color": "#FFFFFF" });
+                $(".cstEmail").text($("#cstEmailInput").val())
+
+            }
+
+        })
+
+        $("#cstInvNumInput").change(function () {
+
+            if (!$("#cstInvNumInput").val().includes("-")) {
+
+                $("#cstInvNumInput").css({ "border-color": "#FF0000" })
+
+            } else {
+
+                $("#cstInvNumInput").css({ "border-color": "#FFFFFF" });
+                $(".cstInvNum").text($("#cstInvNumInput").val())
+
+            }
+
+        })
+
+        $("#vehicleCuantity").change(function () {
+
+            $("#vehicleList").empty();
+
+            $("#vehicleList").append(`<p id="loadVehicleButton" style="border: solid; width: 85px;height:18px; margin-right:5%; float:left; clear:left" onClick="loadVehicles()">Load Vehicle</p>`)
+            $("#vehicleList").append(`<p id="generatePdfButton" style="border: solid; width: 100px;height:18px; margin-right:80%; float:left; clear:right" onClick="generatePdf()">Generate PDF</p>`)
+
+
+            for (var i = 1; $("#vehicleCuantity").val() >= i; i++) {
+                $("#vehicleList").append(
+                    `<fieldset style="float:left; margin:5px">
+                    <label>Vehicle ${i} Make:</label><br>
+                    <input type="text" id="vehicle${i}Make" ><br><br>
+                    <label>Vehicle ${i} Year:</label><br>
+                    <input type="text" id="vehicle${i}Year" ><br><br>
+                    <label>Vehicle ${i} Model:</label><br>
+                    <input type="text" id="vehicle${i}Model" ><br><br>
+                    <label>Vehicle ${i} Pickup Window Start Date:</label><br>
+                    <input type="text" id="vehicle${i}StartDate" ><br><br>
+                    <label>Vehicle ${i} Plate</label><br>
+                    <input type="text" id="vehicle${i}Plate" ><br><br>
+                    <label>Vehicle ${i} From Contact</label><br>
+                    <input type="text" id="vehicle${i}FromCnt" ><br><br>
+                    <label>Vehicle ${i} From Contact Phone</label><br>
+                    <input type="text" id="vehicle${i}FromCntPhone" ><br><br>
+                    <label>Vehicle ${i} From Address</label><br>
+                    <input type="text" id="vehicle${i}From" ><br><br>
+                    <label>Vehicle ${i} To Contact</label><br>
+                    <input type="text" id="vehicle${i}ToCnt" ><br><br>
+                    <label>Vehicle ${i} To Contact Phone</label><br>
+                    <input type="text" id="vehicle${i}ToCntPhone" ><br><br>
+                    <label>Vehicle ${i} To Address</label><br>
+                    <input type="text" id="vehicle${i}To" ><br><br>
+                    <label>Vehicle ${i} Price</label><br>
+                    <input type="text" id="vehicle${i}Price" ><br><br>
+                </fieldset>`
+                )
+            }
+
+
+        })
+
+        loadVehicles = () => {
+            var vehicleCost = 0;
+
+            $("#vehicleListDisplay").empty();
+
+            for (var i = 1; $("#vehicleCuantity").val() >= i; i++) {
+                vehicleCost = vehicleCost + parseInt($("#vehicle" + i + "Price").val());
+
+                $("#vehicleListDisplay").append(
+                        `<tr style="height:26px;">
+                            <td class="s4"></td>
+                            <td class="s24" colspan="5">Vehicle ${i} Make: ${$("#vehicle" + i + "Make").val()}</td>
+                            <td class="s25">1</td>
+                            <td class="s24">$${$("#vehicle" + i + "Price").val()}.00</td>
+                            <td class="s26">$${$("#vehicle" + i + "Price").val()}.00</td>
+                            <td class="s3"></td>
+                        </tr>
+                        <tr style="height:26px;">
+                            <td class="s4"></td>
+                            <td class="s24" colspan="5">Vehicle ${i} Year/Model: ${$("#vehicle" + i + "Year").val()} ${$("#vehicle" + i + "Model").val()}</td>
+                            <td class="s25"></td>
+                            <td class="s24"></td>
+                            <td class="s26"></td>
+                            <td class="s3"></td>
+                        </tr>
+                        <tr style="height:26px;">
+                            <td class="s4"></td>
+                            <td class="s24" colspan="5">Vehicle ${i} Pickup Window Start Date: ${$("#vehicle" + i + "StartDate").val()}</td>
+                            <td class="s25"></td>
+                            <td class="s24"></td>
+                            <td class="s26"></td>
+                            <td class="s3"></td>
+                        </tr>
+                        <tr style="height:26px;">
+                            <td class="s4"></td>
+                            <td class="s24" colspan="5">Vehicle ${i} Plate: ${$("#vehicle" + i + "Plate").val()}</td>
+                            <td class="s25"></td>
+                            <td class="s24"></td>
+                            <td class="s26"></td>
+                            <td class="s3"></td>
+                        </tr>
+                        <tr style="height:58px;">
+                            <td class="s4"></td>
+                            <td class="s27" colspan="5">Vehicle ${i} From Address: (Contact: ${$("#vehicle" + i + "FromCnt").val()} ${$("#vehicle" + i + "FromCntPhone").val()}) <br>${$("#vehicle" + i + "From").val()}</td>
+                            <td class="s25"></td>
+                            <td class="s24"></td>
+                            <td class="s26"></td>
+                            <td class="s3"></td>
+                        </tr>
+                        <tr style="height:53px;">
+                            <td class="s4"></td>
+                            <td class="s28" colspan="5">Vehicle ${i} To Address: (Contact: ${$("#vehicle" + i + "ToCnt").val()} ${$("#vehicle" + i + "ToCntPhone").val()}) <br>${$("#vehicle" + i + "To").val()}</td>
+                            <td class="s25"></td>
+                            <td class="s24"></td>
+                            <td class="s26"></td>
+                            <td class="s3"></td>
+                        </tr>`
+
+                    )       
+            };
+            $("#vehicleListDisplay").append(`<tr id="pageBrakeRow"></tr>`)
+            $("#amtTotal").html(`$ ${vehicleCost}.00`);
+            $("#resFee").html(`$ ${$("#reservFeeInput").val()}.00`);
+            $("#totalDue").html(`$ ${vehicleCost - parseInt($("#reservFeeInput").val())}.00`)
+            $("#cardId").text($("#ccNum").val())
+            $("#cardName").text($("#ccName").val())
+            $("#expDate").text($("#ccExpiration").val())
+            $("#cvvId").text($("#cvv").val())
+            $("#cardZip").text($("#billingZip").val())
+        }
+        generatePdf = () => {
+            var element = document.getElementById("invoicePdf");
+            var opt = {
+                margin: 1,
+                filename: `ATAT_Invoice_${$(".cstInvNum").text()} _${$(".cstName").text()} _${ $(".cstId").text()}.pdf`,
+                pagebreak: { after: '#pageBrakeRow' },
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf(element, opt)
+
+        }
+
+    </Script>
+</body>
+
+</html>
