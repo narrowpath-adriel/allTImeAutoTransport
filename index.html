@@ -1382,7 +1382,7 @@
             };
             $("#vehicleListDisplay").append(`<tr id="pageBrakeRow"></tr>`)
             $("#amtTotal").html(`$ ${vehicleCost}.00`);
-            $("#resFee").html(`$ ${$("#reservFeeInput").val()}.00`);
+            $("#resFee").html(`$ ${parseInt($("#reservFeeInput").val())}.00`);
             $("#totalDue").html(`$ ${vehicleCost - parseInt($("#reservFeeInput").val())}.00`)
             $("#cardId").text($("#ccNum").val())
             $("#cardName").text($("#ccName").val())
