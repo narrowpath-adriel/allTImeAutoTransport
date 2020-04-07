@@ -1206,7 +1206,7 @@
     <Script>
 
         var todayDateFinder = new Date();
-        $(".todayDate").text(todayDateFinder.getMonth() + "/" + todayDateFinder.getDate() + "/" + todayDateFinder.getFullYear());
+        $(".todayDate").text((todayDateFinder.getMonth()+1) + "/" + todayDateFinder.getDate() + "/" + todayDateFinder.getFullYear());
 
         $("#cstNameInput").change(function () {
             $(".cstName").text($("#cstNameInput").val());
