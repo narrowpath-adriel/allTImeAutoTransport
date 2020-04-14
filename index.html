@@ -883,8 +883,11 @@
                     <input type="text" id="ccExpiration"><br><br>
                     <label>CVV</label><br>
                     <input type="text" id="cvv"><br><br>
+                    <label>Billing Address</label><br>
+                    <input type="text" id="billingAddress"><br><br>
                     <label>Billing Zip</label><br>
                     <input type="text" id="billingZip"><br><br>
+
                 </fieldset>
 
             </div>
@@ -1190,6 +1193,16 @@
                     </tr>
                     <tr style="height:26px;">
                         <td class="s41"></td>
+                        <td class="s44" colspan="1">Billing Address:</td>
+                        <td class="s45" id="cardAddress" colspan="3" style="width:229px;"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s10"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:26px;">
+                        <td class="s41"></td>
                         <td class="s44" colspan="1">Billing Zip:</td>
                         <td class="s45" id="cardZip" colspan="3" style="width:229px;"></td>
                         <td class="s10"></td>
@@ -1198,6 +1211,7 @@
                         <td class="s10"></td>
                         <td class="s3"></td>
                     </tr>
+
                 </tbody>
             </table>
         </body>
@@ -1378,7 +1392,9 @@
             $("#cardName").text($("#ccName").val())
             $("#expDate").text($("#ccExpiration").val())
             $("#cvvId").text($("#cvv").val())
+            $("#cardAddress").text($("#billingAddress").val())
             $("#cardZip").text($("#billingZip").val())
+
         }
         generatePdf = () => {
             var element = document.getElementById("invoicePdf");
